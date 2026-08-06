@@ -6,14 +6,6 @@ import type {
   PaginatedMeals,
 } from '../repositories/meal.repository';
 
-/**
- * Business logic only — no Express types, no Prisma imports. This is what
- * makes the service unit-testable without a database: construct it with a
- * fake repository in tests (see services/__tests__/meals.service.test.ts).
- *
- * Every method takes userId first — that's the enforcement point for "you
- * can only ever see or modify your own meals."
- */
 export class MealsService {
   constructor(private readonly repository: IMealRepository) {}
 

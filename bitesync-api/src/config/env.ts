@@ -1,12 +1,3 @@
-/**
- * Centralized, validated environment configuration.
- *
- * Why this exists: without it, a missing DATABASE_URL or JWT_SECRET only
- * fails the moment it's first used — mid-request, in production, hours
- * after deploy. Validating at startup makes the failure immediate, loud,
- * and impossible to miss.
- */
-
 function requireEnv(name: string): string {
   const value = process.env[name];
   if (!value || value.trim() === '') {

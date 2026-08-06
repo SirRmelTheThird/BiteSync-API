@@ -3,14 +3,6 @@ import { ZodError } from 'zod';
 import { AppError } from '../utils/AppError';
 import { logger } from '../config/logger';
 
-/**
- * Single place where any error thrown or passed to next() becomes an HTTP
- * response. Keeps controllers free of res.status(...).json(...) error
- * boilerplate and guarantees a consistent error shape for API consumers
- * (including the Expo app).
- *
- * Must be registered LAST, after all routes, per Express convention.
- */
 export function errorHandler(
   err: unknown,
   req: Request,
@@ -18,8 +10,6 @@ export function errorHandler(
   _next: NextFunction
 ) {
   if (err instanceof AppError) {
-    // Operational errors (bad input, missing resource, auth failure) are
-    // expected traffic, not bugs — log at 'warn', not 'error'.
     logger.warn({ err, path: req.originalUrl }, err.message);
     return res.status(err.statusCode).json({ error: err.message });
   }
@@ -34,10 +24,6 @@ export function errorHandler(
       })),
     });
   }
-
-  // Unexpected/programmer errors: log full detail server-side at 'error'
-  // level, but never leak internals (stack traces, DB error text) to the
-  // client.
   logger.error({ err, path: req.originalUrl }, 'Unhandled error');
   return res.status(500).json({ error: 'Internal server error' });
 }

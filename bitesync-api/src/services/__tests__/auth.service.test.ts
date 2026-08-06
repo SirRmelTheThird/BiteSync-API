@@ -5,8 +5,6 @@ import { AppError } from '../../utils/AppError';
 
 function setup() {
   const users = new FakeUserRepository();
-  // Fake token issuer: proves AuthService only depends on the TokenIssuer
-  // function type, not on jsonwebtoken or a real secret.
   const issueToken = (userId: string) => `fake-token-for-${userId}`;
   const service = new AuthService(users, issueToken);
   return { users, service };

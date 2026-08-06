@@ -6,11 +6,6 @@ import type {
   PaginatedMeals,
 } from '../../meal.repository';
 
-/**
- * In-memory stand-in for PrismaMealRepository. This is the entire point of
- * the Dependency Inversion refactor: MealsService never imports Prisma, so
- * tests can swap in this fake and run in milliseconds with zero database.
- */
 export class FakeMealRepository implements IMealRepository {
   private meals: Meal[] = [];
   private nextId = 1;

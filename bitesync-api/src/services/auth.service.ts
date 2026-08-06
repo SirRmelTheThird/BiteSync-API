@@ -11,13 +11,6 @@ export type AuthResult = {
 };
 
 export type TokenIssuer = (userId: string) => string;
-
-/**
- * No Express, no Prisma imports — same pattern as MealsService. This is
- * what lets auth.service.test.ts exercise register/login logic with a
- * fake in-memory repository, no database required. The token issuer is
- * also injected so tests don't need a real JWT secret configured.
- */
 export class AuthService {
   constructor(
     private readonly users: IUserRepository,

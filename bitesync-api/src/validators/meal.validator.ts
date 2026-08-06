@@ -1,13 +1,5 @@
 import { z } from 'zod';
 
-/**
- * Validation lives here, not in the controller. This is the Single
- * Responsibility fix: the controller's job is to handle the HTTP
- * request/response cycle, not to know the business rules for what makes
- * a valid meal. If a rule changes (e.g. calories must be positive), this
- * is the only file that changes.
- */
-
 export const createMealSchema = z.object({
   name: z.string().trim().min(1, 'name is required').max(120),
   calories: z.number().int().nonnegative(),

@@ -3,7 +3,7 @@ import { prisma } from '../prisma/client';
 
 export type CreateUserData = {
   email: string;
-  password: string; // already-hashed, never plaintext past the service layer
+  password: string;
 };
 
 export interface IUserRepository {

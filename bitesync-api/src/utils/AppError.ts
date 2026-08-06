@@ -1,9 +1,3 @@
-/**
- * A typed, HTTP-aware error. Throwing this anywhere in a service or
- * controller lets the central error handler (middleware/errorHandler.ts)
- * turn it into the right status code and JSON shape automatically —
- * no repeated try/catch or res.status(...) calls scattered around.
- */
 export class AppError extends Error {
   readonly statusCode: number;
   readonly isOperational: boolean;
@@ -11,7 +5,7 @@ export class AppError extends Error {
   constructor(message: string, statusCode = 400) {
     super(message);
     this.statusCode = statusCode;
-    this.isOperational = true; // distinguishes "expected" errors from bugs
+    this.isOperational = true; 
     Object.setPrototypeOf(this, AppError.prototype);
   }
 

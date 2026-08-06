@@ -5,12 +5,6 @@ import { AppError } from '../utils/AppError';
 
 type AccessTokenPayload = { userId: string };
 
-/**
- * Protects a route: requires a valid `Authorization: Bearer <token>`
- * header, verifies it, and attaches `req.userId` for downstream
- * controllers. Every currently-open endpoint (list/create meals, summary)
- * gets wrapped with this.
- */
 export function requireAuth(req: Request, _res: Response, next: NextFunction) {
   const header = req.headers.authorization;
 
